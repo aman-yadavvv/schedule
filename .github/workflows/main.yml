@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
 
+  schedule:
+  - cron: "00 00 * * *"
+
 jobs:
   demo:
     runs-on: ubuntu-latest
@@ -19,5 +22,33 @@ jobs:
           run: npm install
         - name : build 
           run : npm run build
-      
+
+name: building  react js ( cache artifacts )
+
+on:
+  push:
+    branches: [ main 
+    
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: action checkout 
+          run: actions/checkout@v4.2.2
+        - name: setup js 
+          uses: actions/setup-node@v3.9.1
+          with:
+              node-version : 22.x
+            cache: "npm"
+        - name : requirements install
+          run: npm install
+        - name : build 
+          run : npm run build
+        - name : upload artifacts 
+        with:
+        name: nodejs.build
+        path: out/
+        
+  
     
