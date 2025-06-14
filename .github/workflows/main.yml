@@ -1,0 +1,23 @@
+name: building agular js 
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: action checkout 
+          run: actions/checkout@v4.2.2
+        - name: setup js 
+          uses: actions/setup-node@v3.9.1
+          with:
+              node-version : 22.x
+        - name : requirements install
+          run: npm install
+        - name : build 
+          run : npm run build
+      
+    
